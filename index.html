@@ -4,10 +4,79 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
     <title>FrameMastery</title>
 </head>
 <body>
-    
+    <!-- HEADER & THEME SELECTION -->
+
+    <header>
+        <div id="left-header-container">
+            <select name="themes" id="theme-selector">
+                <option value="tenno" selected>Tenno</option>
+                <option value="corpus">Corpus</option>
+                <option value="dark-lotus">Dark Lotus</option>
+                <option value="fortuna">Fortuna</option>
+                <option value="grineer">Grineer</option>
+                <option value="stalker">Stalker</option>
+                <option value="vitruvian">Vitruvian</option>
+            </select>
+            <h1>FrameMastery</h1>
+        </div>
+        <div id="total-mastery-container" class="box-style">
+            <p>Total Mastery: </p>
+        </div>
+    </header>
+    <hr>
+
+    <!-- MAIN CONTENT -->
+
+    <main>
+        <div id="left-main-container">
+            <div id="categories-container">
+                <button class="collapsible-category">Warframes <i class="fa-solid fa-caret-down"></i></button>
+                <button class="collapsible-category">Primary Weapons <i class="fa-solid fa-caret-down"></i></button>
+                <button class="collapsible-category">Secondary Weapons <i class="fa-solid fa-caret-down"></i></button>
+                <button class="collapsible-category">Melee Weapons <i class="fa-solid fa-caret-down"></i></button>
+                <button class="collapsible-category">Companions <i class="fa-solid fa-caret-down"></i></button>
+                <button class="collapsible-category">Vehicles <i class="fa-solid fa-caret-down"></i></button>
+                <button class="collapsible-category">Zaws <i class="fa-solid fa-caret-down"></i></button>
+                <button class="collapsible-category">Kitguns <i class="fa-solid fa-caret-down"></i></button>
+                <button class="collapsible-category">Amps <i class="fa-solid fa-caret-down"></i></button>
+            </div>
+            <div id="caution-container">
+                <p>Caution</p>
+                <button id="complete-all-button" class="button-style">Complete All Items</button>
+                <button id="reset-all-button" class="button-style">Reset All Items</button>
+            </div>
+        </div>
+        <div id="right-main-container">
+            <div id="hover-details-container" class="box-style">
+                <p id="hover-details-preview-text">Hover over an item below for more information</p>
+            </div>
+            <div id="item-selection-container" class="box-style">
+                <div id="item-selection-header-container">
+                    <p id="item-selection-header">Awaiting Selection</p>
+                    <button id="hide-completed-button" class="button-style">Hide Completed</button>
+                </div>
+                <div id="item-selection-main-container"></div>
+            </div>
+        </div>
+    </main>
+
+    <!-- RIGHT NAVIGATION SIDEBAR -->
+
+    <!-- FOOTER -->
+    <footer>
+        <div></div>
+    </footer>
+
     <script type="module" src="./scripts/script.js"></script>
+    <script src="https://kit.fontawesome.com/9769e5ffdf.js" crossorigin="anonymous"></script>
 </body>
 </html>
