@@ -1,7 +1,9 @@
-// Retrieves data from various API-fetching modules
+// Retrieves data from various API-fetching/filtering modules
 import { getWarframesData } from "./api-retrieval/get-warframes.js";
 import { getModsData } from "./api-retrieval/get-mods.js";
 import { getWeaponsData } from "./api-retrieval/get-weapons.js";
+import { getVehiclesData } from "./api-retrieval/get-vehicles.js";
+import { getCompanionsData } from "./api-retrieval/get-companions.js";
 
 // Empty arrays to be populated with specific values
 let warframesNames = [];
@@ -25,12 +27,10 @@ async function getValues(type, array, objectProperty, category) {
     })
 }
 
-getValues("regular", warframesNames, "name", "warframes");
-getValues("prime", warframesPrimeNames, "name", "warframes");
-getValues("archwing", archwingsNames, "name", "warframes");
-getValues("necramech", necramechsNames, "name", "warframes");
-getModsData();
-getWeaponsData();
+//getValues("regular", warframesNames, "name", "warframes");
+//getValues("prime", warframesPrimeNames, "name", "warframes");
+//getModsData();
+//getWeaponsData();
 
 console.log(warframesNames);
 console.log(warframesPrimeNames);
