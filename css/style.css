@@ -14,10 +14,19 @@ body, select {
 /****** HEADER & THEME SELECTION ******/
 /* Header Container */
 header {
+    background-color: var(--tenno-background-color);
+
+    position: sticky;
+    top: 0;
+}
+
+/* Upper Header Container */
+#upper-header-container {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: 10px
+
+    padding: 5px 10px;
 }
 
 /* Theme Selector & Logo Container */
@@ -25,12 +34,13 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
+
     width: 500px;
 }
 
 /* Theme Selector */
 #theme-selector {
-    background: var(--tenno-button-background-color);
+    background: var(--tenno-background-color);
     border: 2px solid #FFFFFF;
     border-bottom: 5px solid var(--tenno-medium-green);
     box-shadow: var(--box-shadow);
@@ -80,22 +90,40 @@ main {
     display: flex;
     align-items: flex-start;
     flex-direction: column;
+
     margin: 50px 20px 60px 40px;
 }
 
 /* Collapsible Categories */
 .collapsible-category {
+    display: flex;
+    align-items: center;
+
     background-color: transparent;
     border: none;
     color: var(--tenno-dark-green);
     cursor: pointer;
     font-size: 26px;
     font-weight: 700;
+    gap: 5px;
 }
 
 /* Downward-Facing Carets */
 .fa-solid {
+    font-size: 15px;
+}
+
+/* Collapsible Content */
+.collapsible-content {
+    display: none;
     font-size: 20px;
+    font-weight: 700;
+    margin-left: 45px;
+}
+
+/* Collapsible Content (When Clicked) */
+.collapsible-content p:active {
+    color: var(--tenno-faded-green);
 }
 
 /* Caution Box */
@@ -110,12 +138,13 @@ main {
 
 /* Button Style - "Complete All Items," "Reset All Items," "Hide Completed" */
 .button-style {
-    background: var(--tenno-button-background-color);
+    background: var(--tenno-background-color);
     border: none;
     border-bottom: 2px solid #FFFFFF;
     border-radius: 8px;
     box-shadow: var(--box-shadow);
     color: var(--tenno-button-green);
+    cursor: pointer;
     font-size: 18px;
     font-weight: 700;
     margin-top: 5px;
@@ -124,7 +153,7 @@ main {
 
 /* Box Style - "Total Mastery Container," "Hover-for-Details Container," "Item Selection Container" */
 .box-style {
-    background: var(--tenno-button-background-color);
+    background: var(--tenno-background-color);
     border: 2px solid #FFFFFF;
     box-shadow: var(--box-shadow);
 }
@@ -141,9 +170,13 @@ main {
     align-items: center;
     justify-content: center;
 
+    position: sticky;
+    top: 70px;
+
+    background-color: var(--tenno-background-color);
     border-radius: 6px;
     margin-bottom: 15px;
-    min-height: 120px
+    min-height: 120px;
 }
 
 /* Hover-for-Details Preview Text */
@@ -155,6 +188,7 @@ main {
 /* Item Selection Container */
 #item-selection-container {
     border-radius: 6px;
+    margin-bottom: 50px;
     min-height: 550px
 }
 
@@ -167,7 +201,7 @@ main {
     padding: 20px;
 }
 
-/* Item Selection Header - "Awaiting Selection" */
+/* Item Selection Header */
 #item-selection-header {
     color: var(--tenno-dark-green);
     font-size: 32px;
@@ -175,19 +209,43 @@ main {
     text-transform: uppercase;
 }
 
-/* Item Selection Main Container */
-#item-selection-main-container {
-
+/* Button - "Hide Founders" */
+#hide-founders-button {
+    margin-right: 15px;
 }
 
-/****** FOOTER ******/
-/* Footer */
-footer div {
-    background-color: var(--tenno-dark-green);
-    height: 40px;
-    margin-top: 40px;
-    width: 100%;
+/* Item Selection Sorting Container */
+#item-selection-sorting-container {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
 
-    position: absolute;
-    bottom: 0;
+    margin-left: 50px;
+    gap: 20px;
+}
+
+/* Item Selection Sorting Buttons */
+#item-selection-sorting-container p {
+    font-size: 20px;
+}
+
+/* Item Selection Main Container - Populated by JavaScript */
+#item-selection-content-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    justify-items: center;
+    
+    gap: 10px;
+    margin: 70px 50px;
+}
+
+/* Item Selection Content - JavaScript Elements */
+.selectable-item {
+    background-color: transparent;
+    border: none;
+    color: var(--tenno-medium-green);
+    cursor: pointer;
+    font-size: 22px;
+    font-weight: 900;
+    text-align: center;
 }
