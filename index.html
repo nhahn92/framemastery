@@ -16,23 +16,25 @@
     <!-- HEADER & THEME SELECTION -->
 
     <header>
-        <div id="left-header-container">
-            <select name="themes" id="theme-selector">
-                <option value="tenno" selected>Tenno</option>
-                <option value="corpus">Corpus</option>
-                <option value="dark-lotus">Dark Lotus</option>
-                <option value="fortuna">Fortuna</option>
-                <option value="grineer">Grineer</option>
-                <option value="stalker">Stalker</option>
-                <option value="vitruvian">Vitruvian</option>
-            </select>
-            <h1>FrameMastery</h1>
+        <div id="upper-header-container">
+            <div id="left-header-container">
+                <select name="themes" id="theme-selector">
+                    <option value="corpus">Corpus</option>
+                    <option value="dark-lotus">Dark Lotus</option>
+                    <option value="fortuna">Fortuna</option>
+                    <option value="grineer">Grineer</option>
+                    <option value="stalker">Stalker</option>
+                    <option value="tenno" selected>Tenno</option>
+                    <option value="vitruvian">Vitruvian</option>
+                </select>
+                <h1>FrameMastery</h1>
+            </div>
+            <div id="total-mastery-container" class="box-style">
+                <p>Total Mastery: <span id="mastery-counter"></span></p>
+            </div>
         </div>
-        <div id="total-mastery-container" class="box-style">
-            <p>Total Mastery: </p>
-        </div>
+        <hr>
     </header>
-    <hr>
 
     <!-- MAIN CONTENT -->
 
@@ -40,14 +42,73 @@
         <div id="left-main-container">
             <div id="categories-container">
                 <button class="collapsible-category">Warframes <i class="fa-solid fa-caret-down"></i></button>
+                <div class="collapsible-content">
+                    <p>Prime</p>
+                    <p>Regular</p>
+                </div>
                 <button class="collapsible-category">Primary Weapons <i class="fa-solid fa-caret-down"></i></button>
+                <div class="collapsible-content">
+                    <p>Bows</p>
+                    <p>Launchers</p>
+                    <p>Rifles</p>
+                    <p>Spearguns</p>
+                    <p>Special</p>
+                    <p>Snipers</p>
+                    <p>Shotguns</p>
+                </div>
                 <button class="collapsible-category">Secondary Weapons <i class="fa-solid fa-caret-down"></i></button>
+                <div class="collapsible-content">
+                    <p>Dual Pistols</p>
+                    <p>Dual Shotguns</p>
+                    <p>Pistols</p>
+                    <p>Shotguns</p>
+                    <p>Thrown</p>
+                </div>
                 <button class="collapsible-category">Melee Weapons <i class="fa-solid fa-caret-down"></i></button>
+                <div class="collapsible-content">
+                    <p>Blades and Whips</p>
+                    <p>Daggers</p>
+                    <p>Dual Daggers</p>
+                    <p>Dual Swords</p>
+                    <p>Claws</p>
+                    <p>Fist Weapons</p>
+                    <p>Gunblades</p>
+                    <p>Heavy Gunblades</p>
+                    <p>Hammers</p>
+                    <p>Hybrid Weapons</p>
+                    <p>Machetes</p>
+                    <p>Nikanas</p>
+                    <p>Nunchakus</p>
+                    <p>Polearms</p>
+                    <p>Rapiers</p>
+                    <p>Scythes</p>
+                    <p>Sparring Weapons</p>
+                    <p>Staves</p>
+                    <p>Swords</p>
+                    <p>Swords and Shields</p>
+                    <p>Glaives</p>
+                    <p>Tonfas</p>
+                    <p>Whips</p>
+                </div>
                 <button class="collapsible-category">Companions <i class="fa-solid fa-caret-down"></i></button>
+                <div class="collapsible-content">
+                    <p>Beasts</p>
+                    <p>Robotics</p>
+                    <p>Weapons</p>
+                </div>
                 <button class="collapsible-category">Vehicles <i class="fa-solid fa-caret-down"></i></button>
-                <button class="collapsible-category">Zaws <i class="fa-solid fa-caret-down"></i></button>
-                <button class="collapsible-category">Kitguns <i class="fa-solid fa-caret-down"></i></button>
-                <button class="collapsible-category">Amps <i class="fa-solid fa-caret-down"></i></button>
+                <div class="collapsible-content">
+                    <p>Archwings</p>
+                    <div class="collapsible-content">
+                        <p>Archguns</p>
+                        <p>Archmelee</p>
+                    </div>
+                    <p>Necramechs</p>
+                    <p>Plexus</p>
+                </div>
+                <button class="collapsible-category">Zaws <i class="fa-solid fa-caret-left"></i></button>
+                <button class="collapsible-category">Kitguns <i class="fa-solid fa-caret-left"></i></button>
+                <button class="collapsible-category">Amps <i class="fa-solid fa-caret-left"></i></button>
             </div>
             <div id="caution-container">
                 <p>Caution</p>
@@ -61,10 +122,19 @@
             </div>
             <div id="item-selection-container" class="box-style">
                 <div id="item-selection-header-container">
-                    <p id="item-selection-header">Awaiting Selection</p>
-                    <button id="hide-completed-button" class="button-style">Hide Completed</button>
+                    <p id="item-selection-header">Warframes / All <span id="item-counter"></span></p>
+                    <div>
+                        <button id="hide-founders-button" class="button-style">Hide Founders</button>
+                        <button id="hide-completed-button" class="button-style">Hide Completed</button>
+                    </div>
                 </div>
-                <div id="item-selection-main-container"></div>
+                <div id="item-selection-sorting-container">
+                    <p>Sort By: </p>
+                    <button id="sort-all-button" class="button-style">All</button>
+                    <button id="sort-regular-button" class="button-style">Non-Prime</button>
+                    <button id="sort-prime-button" class="button-style">Prime</button>
+                </div>
+                <div id="item-selection-content-container"></div>
             </div>
         </div>
     </main>
