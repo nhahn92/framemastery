@@ -43,7 +43,7 @@ header {
     background: var(--tenno-background-color);
     border: 2px solid #FFFFFF;
     border-bottom: 5px solid var(--tenno-medium-green);
-    box-shadow: var(--box-shadow);
+    box-shadow: var(--active-box-shadow);
     cursor: pointer;
     font-size: 18px;
     font-weight: 700;
@@ -129,20 +129,53 @@ main {
 /* Caution Box */
 #caution-container {
     color: var(--tenno-dark-green);
-    font-size: 25px;
-    font-weight: 900;
     text-align: center;
-    text-transform: uppercase;
     width: 250px;
 }
 
+/* "Caution" */
+#caution-container p {
+    font-size: 25px;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+/* Tooltip Container */
+.unlock-tooltip {
+    position: relative;
+}
+
+/* Tooltip Text - "Double-click to unlock" */
+.unlock-tooltip-text {
+    display: none;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+/* Tooltip/Text - On Hover */
+.unlock-tooltip:hover .unlock-tooltip-text {
+    background-color: var(--tenno-tooltip-green);
+    border: 2px solid #89AEB7;
+    color: var(--tenno-button-green);
+    display: block;
+    padding: 5px 10px;
+    text-align: center;
+    width: max-content;
+    
+    position: absolute;
+    left: 30%;
+    top: 80%;
+  }
+
+   
+
 /* Button Style - "Complete All Items," "Reset All Items," "Hide Completed" */
 .button-style {
-    background: var(--tenno-background-color);
+    background-color: var(--tenno-background-color);
     border: none;
     border-bottom: 2px solid #FFFFFF;
     border-radius: 8px;
-    box-shadow: var(--box-shadow);
+    box-shadow: var(--active-box-shadow);
     color: var(--tenno-button-green);
     cursor: pointer;
     font-size: 18px;
@@ -155,7 +188,7 @@ main {
 .box-style {
     background: var(--tenno-background-color);
     border: 2px solid #FFFFFF;
-    box-shadow: var(--box-shadow);
+    box-shadow: var(--active-box-shadow);
 }
 
 /* Right Main Container */
@@ -209,9 +242,22 @@ main {
     text-transform: uppercase;
 }
 
-/* Button - "Hide Founders" */
-#hide-founders-button {
-    margin-right: 15px;
+/* Item Selection Header Button Container */
+#item-selection-header-button-container {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    
+    gap: 15px;
+    max-width: 400px;
+}
+
+/* Button - "Complete Category" */
+#complete-category-button {
+    box-shadow: var(--inactive-box-shadow);
+    color: var(--tenno-faded-green);
+    cursor: default;
 }
 
 /* Item Selection Sorting Container */
