@@ -110,10 +110,11 @@
                 <button class="collapsible-category">Kitguns <i class="fa-solid fa-caret-left"></i></button>
                 <button class="collapsible-category">Amps <i class="fa-solid fa-caret-left"></i></button>
             </div>
-            <div id="caution-container">
+            <div id="caution-container" class="unlock-tooltip">
                 <p>Caution</p>
-                <button id="complete-all-button" class="button-style">Complete All Items</button>
-                <button id="reset-all-button" class="button-style">Reset All Items</button>
+                <button id="complete-all-button" class="button-style" disabled>Complete All Items</button>
+                <button id="reset-all-button" class="button-style" disabled>Reset All Items</button>
+                <span class="unlock-tooltip-text">Double-click to unlock</span>
             </div>
         </div>
         <div id="right-main-container">
@@ -123,9 +124,10 @@
             <div id="item-selection-container" class="box-style">
                 <div id="item-selection-header-container">
                     <p id="item-selection-header">Warframes / All <span id="item-counter"></span></p>
-                    <div>
-                        <button id="hide-founders-button" class="button-style">Hide Founders</button>
+                    <div id="item-selection-header-button-container">
+                        <button id="exclude-founders-button" class="button-style">Exclude Founders</button>
                         <button id="hide-completed-button" class="button-style">Hide Completed</button>
+                        <button id="complete-category-button" class="button-style unlock-tooltip" disabled>Complete Category <span class="unlock-tooltip-text">Double-click to unlock</span></button>
                     </div>
                 </div>
                 <div id="item-selection-sorting-container">
