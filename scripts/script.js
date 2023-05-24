@@ -4,12 +4,18 @@ import { getWarframesData } from "./api-retrieval/get-warframes.js";
 import { getWeaponsData } from "./api-retrieval/get-weapons.js";
 import { getVehiclesData } from "./api-retrieval/get-vehicles.js";
 import { getCompanionsData } from "./api-retrieval/get-companions.js";
+import { buttonCheck, updateCounters } from "./utility-functions.js";
 
 // DOM Elements
 const itemSelectionSortingContainer = document.querySelector("#item-selection-sorting-container");
 const itemSelectionContentContainer = document.querySelector("#item-selection-content-container");
+const itemSelectionHeader = document.querySelector("#item-selection-header");
 const itemCounter = document.querySelector("#item-counter");
 const masteryCounter = document.querySelector("#mastery-counter");
+const hideCompletedButton = document.querySelector("#hide-completed-button");
+const completedItem = document.getElementsByClassName("completed");
+const excludeFoundersButton = document.querySelector("#exclude-founders-button");
+const foundersItem = document.getElementsByClassName("founders");
 
 // Filtered API Data
 const allItems = await getAllItemsData();
@@ -36,11 +42,18 @@ const roboticCompanions = await getCompanionsData("robotic");
 
 // Counters & Defaults
 let totalMasteryCompleteCounter = 0;
+let totalMasteryAllCounter = allItems.length;
+let completeCounter = 0;
+let categoryTotal = 0;
 let defaultTheme = "Tenno";
-masteryCounter.innerHTML = `${totalMasteryCompleteCounter} / ${allItems.length}`;
+masteryCounter.innerHTML = `${totalMasteryCompleteCounter} / ${totalMasteryAllCounter}`;
 
 // Creates elements to populate the #item-selection-content-container depending on passed array
 const createDisplay = array => {
+    // Updates the counter to match the passed array
+    categoryTotal = array.length;
+    itemCounter.innerHTML = `(${completeCounter} / ${categoryTotal})`;
+
     const itemNames = array.map(item => {
         // Adds "non-prime" or "prime" classes depending on the item
         if (!["Excalibur Prime", "Lato Prime", "Skana Prime"].includes(item.name)) {
@@ -63,32 +76,91 @@ const createDisplay = array => {
 
     // Populates the #item-selection-content-container with item names from the passed array
     itemSelectionContentContainer.innerHTML = itemNames.join("");
-    // Populates the #item-selection-content-container header with the number of items from the passed array
-    itemCounter.innerHTML = `(${array.length})`;
     
     // Adds click functionality to the items within #item-selection-content-container
     const selectableContent = document.getElementsByClassName("selectable-item");
+    const selectableContentContainer = document.getElementsByClassName("selectable-item-container");
     for (let i = 0; i < selectableContent.length; i++) {
         selectableContent[i].addEventListener("click", () => {
             // Adds the "completed" class to clicked items if they don't already have it
-            if (!selectableContent[i].classList.contains("completed")) {
-                selectableContent[i].classList.add("completed");
-                // Adds +1 to the Total Mastery count per click
+            if (!selectableContentContainer[i].classList.contains("completed")) {
+                selectableContentContainer[i].classList.add("completed");
+                // Adds 1 to the Total Mastery count per click
                 totalMasteryCompleteCounter++;
+                // Adds 1 to the Complete Counter per click
+                completeCounter++;
                 // Changes the item's color to faded when completed
                 selectableContent[i].style.color = "var(--tenno-faded-green)";
+                // Checks if the "Hide Completed" button is active and hides new selections
+                if (hideCompletedButton.innerHTML.indexOf("Show Completed") !== -1) {
+                    for (let i = 0; i < completedItem.length; i++) {
+                        completedItem[i].style.display = "none";
+                    }
+                }
             // Removes the "completed" class to clicked items if they have it
             } else {
-                selectableContent[i].classList.remove("completed");
-                // Subtracts -1 from the Total Mastery count per click
+                selectableContentContainer[i].classList.remove("completed");
+                // Subtracts 1 from the Total Mastery count per click
                 totalMasteryCompleteCounter--;
+                // Subtracts 1 from the Complete Counter per click
+                completeCounter--;
                 // Changes the item's color to default when incompleted
                 selectableContent[i].style.color = "var(--tenno-medium-green)";
             }
-            // Changes the Total Mastery count after a click
-            masteryCounter.innerHTML = `${totalMasteryCompleteCounter} / ${allItems.length}`;
+            updateCounters(masteryCounter, itemCounter, totalMasteryCompleteCounter, totalMasteryAllCounter, completeCounter, categoryTotal);
         })
     }
+
+    // "Hide Completed" Button Functionality
+    hideCompletedButton.addEventListener("click", () => {
+        buttonCheck(hideCompletedButton, "Hide Completed", "Show Completed", "completed", selectableContentContainer);
+        // Keeps completed Founders items hidden if "Exclude Founders" button is active
+        if (excludeFoundersButton.innerHTML.indexOf("Include Founders") !== -1) {
+            for (let i = 0; i < foundersItem.length; i++) {
+                foundersItem[i].style.display = "none";
+            }
+        }
+    })
+
+    // "Exclude Founders" Button Functionality
+    excludeFoundersButton.addEventListener("click", () => {
+        buttonCheck(excludeFoundersButton, "Exclude Founders", "Include Founders", "founders", selectableContentContainer);
+        if (excludeFoundersButton.innerHTML.indexOf("Include Founders") !== -1) {
+            // Subtracts the three excluded Founders items from the Total Mastery count
+            totalMasteryAllCounter -= 3;
+            // If the visible category is Warframes, Secondary Weapons, or Melee Weapons, subtracts the excluded
+            // founders item from the total Category count
+            if (itemSelectionHeader.innerHTML.includes("Warframes", "Secondary Weapons", "Melee Weapons")) {
+                categoryTotal -= 1;
+            }
+            // Removes the excluded Founders item from the completed Category count as long as it's above 0
+            for (let i = 0; i < foundersItem.length; i++) {
+                if (foundersItem[i].classList.contains("completed") && completeCounter > 0) {
+                    completeCounter -= 1;
+                }
+            }
+        } else {
+            // Adds the three included Founders items to the Total Mastery count
+            totalMasteryAllCounter += 3;
+            // If the visible category is Warframes, Secondary Weapons, or Melee Weapons, adds the included
+            // founders item to the total Category count
+            if (itemSelectionHeader.innerHTML.includes("Warframes", "Secondary Weapons", "Melee Weapons")) {
+                categoryTotal += 1;
+            }
+            if (hideCompletedButton.innerHTML.indexOf("Show Completed") !== -1) {
+                for (let i = 0; i < foundersItem.length; i++) {
+                    foundersItem[i].style.display = "none";
+                }
+            }
+            // Adds the included Founders item to the completed Category count
+            for (let i = 0; i < foundersItem.length; i++) {
+                if (foundersItem[i].classList.contains("completed")) {
+                    completeCounter += 1;
+                }
+            }
+        }
+        updateCounters(masteryCounter, itemCounter, totalMasteryCompleteCounter, totalMasteryAllCounter, completeCounter, categoryTotal);
+    })
 };
 
 // Populates the #item-selection-content-container on page load with all Warframes
